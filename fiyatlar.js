@@ -74,7 +74,7 @@ const FIYATLAR = {
 
   /* ──────────────── TATLILAR ──────────────── */
 
-  "Halka Tatlısı":        25,
+  "Halka Tatlısı":        2500,
   "Şekerpare":            40,
   "Bal Badem":            40,
 
