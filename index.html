@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<title>ASKER KOKOREÇ | Premium QR Menü</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0c09;
+  --bg2: #101410;
+  --surface: #161c14;
+  --border: rgba(160,190,100,0.12);
+  --text: #e8eddf;
+  --text2: #8a9e78;
+  --gold: #7aab3a;
+  --gold-glow: rgba(100,160,50,0.25);
+  --grad: linear-gradient(135deg, #3a5c1a, #7aab3a);
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  --header-h: 70px;
+}
+[data-theme="light"] {
+  --bg: #f0f4ec; --bg2: #ffffff; --surface: #e4ead9;
+  --border: rgba(80,110,40,0.15); --text: #1a2210; --text2: #4a6030;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+body::before {
+  content: ''; position: fixed; top: -10%; right: -10%;
+  width: 400px; height: 400px; background: var(--gold-glow);
+  filter: blur(120px); border-radius: 50%; z-index: -1;
+}
+.header {
+  position: sticky; top: 0; z-index: 1000; height: var(--header-h);
+  background: rgba(5,5,5,0.8); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); display: flex; align-items: center;
+}
+.nav {
+  width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); flex-shrink: 0; }
+.logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; line-height: 1; white-space: nowrap; }
+.logo-text span { color: var(--gold); }
+.pill-bar-wrap { position: sticky; top: var(--header-h); z-index: 999; padding: 10px 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+.pill-bar { display: flex; gap: 10px; overflow-x: auto; padding: 5px 20px; scrollbar-width: none; }
+.pill-bar::-webkit-scrollbar { display: none; }
+.pill { padding: 10px 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--text2); font-weight: 600; font-size: 0.85rem; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); white-space: nowrap; cursor: pointer; }
+.pill.active { background: var(--grad); color: #fff; box-shadow: 0 5px 15px var(--gold-glow); transform: translateY(-2px); }
+.search-wrap { margin: 20px auto; max-width: 500px; padding: 0 20px; }
+.search-box { background: var(--surface); border-radius: 15px; padding: 12px 20px; display: flex; align-items: center; border: 1px solid var(--border); }
+.search-input { background: transparent; border: none; color: var(--text); width: 100%; outline: none; margin-left: 10px; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 16px; padding: 20px; }
+.menu-card { background: var(--surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; transition: transform 0.3s ease; }
+.menu-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.card-thumb img { width: 100%; height: 190px; object-fit: cover; object-position: center center; display: block; }
+.card-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.card-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.card-price { color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; }
+.lang-group { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 50px; padding: 3px; }
+.lang-btn { width: 32px; height: 32px; border-radius: 50%; font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s; background: none; border: none; }
+.lang-btn.active { background: var(--grad); box-shadow: 0 2px 8px var(--gold-glow); transform: scale(1.12); }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width: 768px) { .menu-grid { grid-template-columns: repeat(auto-fill, minmax(155px,1fr)); gap:12px; padding:12px; } .card-thumb img { height:160px; } }
+@media (max-width: 480px) { .menu-grid { grid-template-columns: repeat(2,1fr); gap:10px; padding:10px; } .card-thumb img { height:140px; } }
+.contact-section { margin-top:3rem; padding:3rem 1.5rem; border-top:1px solid var(--border); background:radial-gradient(ellipse at center,var(--bg2) 0%,var(--bg) 70%); }
+.contact-inner { max-width:600px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:2rem; text-align:center; }
+.contact-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:3px; color:var(--gold); }
+.contact-items { display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; }
+.contact-item { display:flex; align-items:center; gap:14px; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 22px; min-width:220px; }
+.c-badge { width:44px; height:44px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+.c-label { font-size:0.7rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--text2); }
+.c-value { font-size:0.95rem; font-weight:600; color:var(--text); margin-top:2px; }
+.c-value a { color:var(--gold); text-decoration:none; }
+footer { padding:1.4rem 1.5rem; border-top:1px solid var(--border); text-align:center; font-size:0.82rem; color:var(--text2); }
+</style>
+</head>
+<body>
+
+<div id="splash" style="position:fixed;inset:0;z-index:10000;background:#0a0c09;display:flex;align-items:center;justify-content:center;transition:0.8s;">
+  <h1 style="font-family:'Bebas Neue';color:#7aab3a;font-size:3rem;letter-spacing:5px;">ASKER KOKOREÇ</h1>
+</div>
+
+<header class="header">
+  <nav class="nav">
+    <a class="logo" href="#">
+      <img src="assets/logo.jpeg" alt="Asker Kokoreç Logo"/>
+      <div class="logo-text">ASKER <span>KOKOREÇ</span></div>
+    </a>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="lang-group">
+        <button class="lang-btn active" data-lang="tr">🇹🇷</button>
+        <button class="lang-btn" data-lang="en">🇬🇧</button>
+      </div>
+      <button id="themeToggle" style="font-size:1.2rem;background:none;border:none;cursor:pointer;">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<div class="pill-bar-wrap">
+  <div class="pill-bar" id="pillBar"></div>
+</div>
+
+<main class="container">
+  <div class="search-wrap">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Lezzet ara...">
+    </div>
+  </div>
+  <div id="menuContent"></div>
+</main>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-title" id="contactTitle">📍 İletişim</div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="c-badge">📞</div>
+        <div>
+          <div class="c-label" id="labelPhone">Telefon</div>
+          <div class="c-value"><a href="tel:05374873340">0537 487 33 40</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-badge">🕒</div>
+        <div>
+          <div class="c-label" id="labelHours">Çalışma Saatleri</div>
+          <div class="c-value" id="hoursValue">Her gün 12:00 – 03:00</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-badge">📍</div>
+        <div>
+          <div class="c-label" id="labelAddress">Adres</div>
+          <div class="c-value">Serdivan / Sakarya</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> ASKER KOKOREÇ • Serdivan / Sakarya
+</footer>
+
+<!-- FİYATLARI GÜNCELLEMEK İÇİN → fiyatlar.js dosyasını açın, sadece rakamları değiştirin -->
+<script src="fiyatlar.js"></script>
+<script>
+let lang = "tr";
+
+const I18N = {
+  tr: { search:"Lezzet ara...", contact:"📍 İletişim", phone:"Telefon", hours:"Çalışma Saatleri", hoursVal:"Her gün 12:00 – 03:00", address:"Adres" },
+  en: { search:"Search...", contact:"📍 Contact", phone:"Phone", hours:"Working Hours", hoursVal:"Every day 12:00 – 03:00", address:"Address" }
+};
+
+const CATEGORIES = [
+  { id:"ekmek",    tr:"Ekmek Arası", en:"Sandwiches", icon:"🥖" },
+  { id:"porsiyon", tr:"Porsiyonlar", en:"Portions",   icon:"🍽️" },
+  { id:"icecek",   tr:"İçecekler",   en:"Beverages",  icon:"��" },
+  { id:"tatli",    tr:"Tatlılar",    en:"Desserts",   icon:"🍰" },
+  { id:"cig",      tr:"Çiğ Köfte",  en:"Cigköfte",   icon:"🌶️" }
+];
+
+const MENU = [
+  { cat:"ekmek",  name:{tr:"Bütün Kokoreç",            en:"Whole Kokoreç"},          price:FIYATLAR["Bütün Kokoreç"],            img:"assets/butunkokorec.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Kokoreç",        en:"3/4 Kokoreç"},            price:FIYATLAR["Üç Çeyrek Kokoreç"],        img:"assets/ucceyrekkokorec.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Kokoreç",             en:"Half Kokoreç"},           price:FIYATLAR["Yarım Kokoreç"],            img:"assets/yarimkokorec.jpeg" },
+  { cat:"ekmek",  name:{tr:"Çeyrek Kokoreç",            en:"Quarter Kokoreç"},        price:FIYATLAR["Çeyrek Kokoreç"],           img:"assets/ceyrekkokorec.jpeg" },
+  { cat:"ekmek",  name:{tr:"Bütün Köfte",               en:"Whole Meatball"},         price:FIYATLAR["Bütün Köfte"],              img:"assets/butunkofte.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Köfte",           en:"3/4 Meatball"},           price:FIYATLAR["Üç Çeyrek Köfte"],          img:"assets/ucceyrekkofte.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Köfte",               en:"Half Meatball"},          price:FIYATLAR["Yarım Köfte"],              img:"assets/yarimkofte.jpeg" },
+  { cat:"ekmek",  name:{tr:"Çeyrek Köfte",              en:"Quarter Meatball"},       price:FIYATLAR["Çeyrek Köfte"],             img:"assets/ceyrekkofte.jpeg" },
+  { cat:"ekmek",  name:{tr:"Bütün Sucuk",               en:"Whole Soujouk"},          price:FIYATLAR["Bütün Sucuk"],              img:"assets/butunsucuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Sucuk",           en:"3/4 Soujouk"},            price:FIYATLAR["Üç Çeyrek Sucuk"],          img:"assets/ucceyreksucuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Sucuk",               en:"Half Soujouk"},           price:FIYATLAR["Yarım Sucuk"],              img:"assets/yarimsucuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Çeyrek Sucuk",              en:"Quarter Soujouk"},        price:FIYATLAR["Çeyrek Sucuk"],             img:"assets/ceyreksucuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Bütün Ciğer",               en:"Whole Liver"},            price:FIYATLAR["Bütün Ciğer"],              img:"assets/butunciger.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Ciğer",           en:"3/4 Liver"},              price:FIYATLAR["Üç Çeyrek Ciğer"],          img:"assets/ucceyrekciger.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Ciğer",               en:"Half Liver"},             price:FIYATLAR["Yarım Ciğer"],              img:"assets/yarimciger.jpeg" },
+  { cat:"ekmek",  name:{tr:"Çeyrek Ciğer",              en:"Quarter Liver"},          price:FIYATLAR["Çeyrek Ciğer"],             img:"assets/ceyrekciger.jpeg" },
+  { cat:"ekmek",  name:{tr:"Bütün Tavuk",               en:"Whole Chicken"},          price:FIYATLAR["Bütün Tavuk"],              img:"assets/butuntavuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Tavuk",           en:"3/4 Chicken"},            price:FIYATLAR["Üç Çeyrek Tavuk"],          img:"assets/ucceyrektavuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Tavuk",               en:"Half Chicken"},           price:FIYATLAR["Yarım Tavuk"],              img:"assets/yarimtavuk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Bütün Uykuluk",             en:"Whole Sweetbread"},       price:FIYATLAR["Bütün Uykuluk"],            img:"assets/butunuykuluk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Üç Çeyrek Uykuluk",         en:"3/4 Sweetbread"},         price:FIYATLAR["Üç Çeyrek Uykuluk"],        img:"assets/ucceyrekuykuluk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Yarım Uykuluk",             en:"Half Sweetbread"},        price:FIYATLAR["Yarım Uykuluk"],            img:"assets/yarimuykuluk.jpeg" },
+  { cat:"ekmek",  name:{tr:"Çeyrek Uykuluk",            en:"Quarter Sweetbread"},     price:FIYATLAR["Çeyrek Uykuluk"],           img:"assets/ceyrekuykuluk.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Kokoreç",         en:"Portion Kokoreç"},        price:FIYATLAR["Porsiyon Kokoreç"],         img:"assets/porsiyonkokorec.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Köfte",           en:"Portion Meatball"},       price:FIYATLAR["Porsiyon Köfte"],           img:"assets/porsiyonkofte.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Sucuk",           en:"Portion Soujouk"},        price:FIYATLAR["Porsiyon Sucuk"],           img:"assets/porsiyonsucuk.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Ciğer",           en:"Portion Liver"},          price:FIYATLAR["Porsiyon Ciğer"],           img:"assets/porsiyonciger.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Tavuk",           en:"Portion Chicken"},        price:FIYATLAR["Porsiyon Tavuk"],           img:"assets/porsiyontavuk.jpeg" },
+  { cat:"porsiyon",name:{tr:"Porsiyon Uykuluk",         en:"Portion Sweetbread"},     price:FIYATLAR["Porsiyon Uykuluk"],         img:"assets/porsiyonuykuluk.jpeg" },
+  { cat:"porsiyon",name:{tr:"Midye (Adet)",             en:"Mussel (Each)"},          price:FIYATLAR["Midye (Adet)"],             img:"assets/midye.jpeg" },
+  { cat:"icecek",  name:{tr:"Küçük Ayran",              en:"Small Ayran"},            price:FIYATLAR["Küçük Ayran"],              img:"assets/ayran.jpeg" },
+  { cat:"icecek",  name:{tr:"Büyük Ayran",              en:"Large Ayran"},            price:FIYATLAR["Büyük Ayran"],              img:"assets/buyukayran.jpeg" },
+  { cat:"icecek",  name:{tr:"Şişe Ayran",               en:"Bottle Ayran"},           price:FIYATLAR["Şişe Ayran"],               img:"assets/siseayran.jpeg" },
+  { cat:"icecek",  name:{tr:"Kutu Kola",                en:"Can Cola"},               price:FIYATLAR["Kutu Kola"],                img:"assets/kutukola.jpeg" },
+  { cat:"icecek",  name:{tr:"Şişe Kola",                en:"Bottle Cola"},            price:FIYATLAR["Şişe Kola"],                img:"assets/sisekola.jpeg" },
+  { cat:"icecek",  name:{tr:"1 lt Kola",                en:"1L Cola"},                price:FIYATLAR["1 lt Kola"],                img:"assets/1ltkola.jpeg" },
+  { cat:"icecek",  name:{tr:"2.5 lt Kola",              en:"2.5L Cola"},              price:FIYATLAR["2.5 lt Kola"],              img:"assets/25ltkola.jpeg" },
+  { cat:"icecek",  name:{tr:"Kutu Yedigün",             en:"Can Yedigün"},            price:FIYATLAR["Kutu Yedigün"],             img:"assets/kutuyedigun.jpeg" },
+  { cat:"icecek",  name:{tr:"Şişe Yedigün",             en:"Bottle Yedigün"},         price:FIYATLAR["Şişe Yedigün"],             img:"assets/siseyedigun.jpeg" },
+  { cat:"icecek",  name:{tr:"Kutu Fruko",               en:"Can Fruko"},              price:FIYATLAR["Kutu Fruko"],               img:"assets/kutufruka.jpeg" },
+  { cat:"icecek",  name:{tr:"Meyve Suyu",               en:"Fruit Juice"},            price:FIYATLAR["Meyve Suyu"],               img:"assets/meyvesuyu.jpeg" },
+  { cat:"icecek",  name:{tr:"Meyveli Soda",             en:"Fruity Soda"},            price:FIYATLAR["Meyveli Soda"],             img:"assets/meyvelisoda.jpeg" },
+  { cat:"icecek",  name:{tr:"Soda",                     en:"Soda"},                   price:FIYATLAR["Soda"],                     img:"assets/soda.jpeg" },
+  { cat:"icecek",  name:{tr:"Su",                       en:"Water"},                  price:FIYATLAR["Su"],                       img:"assets/su.jpeg" },
+  { cat:"icecek",  name:{tr:"Çay",                      en:"Turkish Tea"},            price:FIYATLAR["Çay"],                      img:"assets/cay.jpeg" },
+  { cat:"icecek",  name:{tr:"Ice Tea",                  en:"Ice Tea"},                price:FIYATLAR["Ice Tea"],                  img:"assets/icetea.jpeg" },
+  { cat:"icecek",  name:{tr:"Niğde Gazozu",             en:"Nigde Soda"},             price:FIYATLAR["Niğde Gazozu"],             img:"assets/nigdegazozu.jpeg" },
+  { cat:"icecek",  name:{tr:"Şalgam Suyu",              en:"Turnip Juice"},           price:FIYATLAR["Şalgam Suyu"],              img:"assets/salgam.jpeg" },
+  { cat:"tatli",   name:{tr:"Halka Tatlısı",            en:"Ring Dessert"},           price:FIYATLAR["Halka Tatlısı"],            img:"assets/halkatatlısı.jpeg" },
+  { cat:"tatli",   name:{tr:"Şekerpare",                en:"Şekerpare"},              price:FIYATLAR["Şekerpare"],                img:"assets/sekerpare.jpeg" },
+  { cat:"tatli",   name:{tr:"Bal Badem",                en:"Honey Almond"},           price:FIYATLAR["Bal Badem"],                img:"assets/balbadem.jpeg" },
+  { cat:"cig",     name:{tr:"Çiğ Köfte Dürüm",         en:"Cigköfte Wrap"},          price:FIYATLAR["Çiğ Köfte Dürüm"],         img:"assets/cigkoftedurum.jpeg" },
+  { cat:"cig",     name:{tr:"Çiğ Köfte Porsiyon (250 gr)",en:"Cigköfte Portion (250g)"},price:FIYATLAR["Çiğ Köfte Porsiyon (250 gr)"],img:"assets/cigkofteporsiyon.jpeg" },
+  { cat:"cig",     name:{tr:"500 gr Çiğ Köfte",        en:"500g Cigköfte"},          price:FIYATLAR["500 gr Çiğ Köfte"],        img:"assets/yarimkgcigkofte.jpeg" },
+  { cat:"cig",     name:{tr:"1 KG Çiğ Köfte Malzemesiz",en:"1 KG Cigköfte Plain"},   price:FIYATLAR["1 KG Çiğ Köfte Malzemesiz"],img:"assets/1kgcigkofte.jpeg" },
+  { cat:"cig",     name:{tr:"1 KG Çiğ Köfte",          en:"1 KG Cigköfte w/Veg"},    price:FIYATLAR["1 KG Çiğ Köfte"],          img:"assets/1kgcigkoftemalzemeli.jpeg" }
+];
+
+function init() { renderPills(); renderMenu(); }
+
+function renderPills() {
+  const bar = document.getElementById("pillBar");
+  bar.innerHTML = "";
+  CATEGORIES.forEach((cat, i) => {
+    const btn = document.createElement("button");
+    btn.className = "pill" + (i === 0 ? " active" : "");
+    btn.innerHTML = cat.icon + " " + cat[lang];
+    btn.onclick = () => {
+      document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(cat.id).scrollIntoView({ behavior:"smooth", block:"start" });
+    };
+    bar.appendChild(btn);
+  });
+}
+
+function renderMenu(filter) {
+  filter = filter || "";
+  const cont = document.getElementById("menuContent");
+  cont.innerHTML = "";
+  const q = filter.toLowerCase();
+  CATEGORIES.forEach(cat => {
+    const items = MENU.filter(m => m.cat === cat.id && m.name[lang].toLowerCase().includes(q));
+    if (!items.length) return;
+    const sec = document.createElement("section");
+    sec.id = cat.id;
+    sec.innerHTML = '<h2 style="padding:20px 20px 8px;font-family:\'Bebas Neue\';font-size:1.8rem;letter-spacing:2px;color:var(--gold)">' + cat.icon + " " + cat[lang] + "</h2>";
+    const grid = document.createElement("div");
+    grid.className = "menu-grid";
+    items.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "menu-card";
+      card.innerHTML =
+        '<div class="card-thumb"><img src="' + item.img + '" loading="lazy" alt="' + item.name[lang] + '"></div>' +
+        '<div class="card-body"><div class="card-name">' + item.name[lang] + '</div><div class="card-price">₺' + item.price + '</div></div>';
+      grid.appendChild(card);
+    });
+    sec.appendChild(grid);
+    cont.appendChild(sec);
+  });
+}
+
+document.getElementById("searchInput").oninput = function(e) { renderMenu(e.target.value); };
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+  btn.onclick = () => {
+    lang = btn.dataset.lang;
+    document.querySelectorAll(".lang-btn").forEach(b => b.classList.toggle("active", b === btn));
+    document.getElementById("searchInput").placeholder = I18N[lang].search;
+    document.getElementById("searchInput").value = "";
+    document.getElementById("contactTitle").textContent = I18N[lang].contact;
+    document.getElementById("labelPhone").textContent   = I18N[lang].phone;
+    document.getElementById("labelHours").textContent   = I18N[lang].hours;
+    document.getElementById("hoursValue").textContent   = I18N[lang].hoursVal;
+    document.getElementById("labelAddress").textContent = I18N[lang].address;
+    renderPills();
+    renderMenu();
+  };
+});
+
+document.getElementById("themeToggle").onclick = () => {
+  const html = document.documentElement;
+  const isDark = html.getAttribute("data-theme") === "dark";
+  html.setAttribute("data-theme", isDark ? "light" : "dark");
+  document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
+};
+
+window.onload = () => {
+  document.getElementById("year").textContent = new Date().getFullYear();
+  init();
+  setTimeout(() => {
+    document.getElementById("splash").style.opacity = "0";
+    setTimeout(() => document.getElementById("splash").remove(), 800);
+  }, 1200);
+};
+</script>
+</body>
+</html>
