@@ -74,15 +74,15 @@ const FIYATLAR = {
 
   /* ──────────────── TATLILAR ──────────────── */
 
-  "Halka Tatlısı":        2500,
+  "Halka Tatlısı":        30,
   "Şekerpare":            40,
   "Bal Badem":            40,
 
   /* ──────────────── ÇİĞ KÖFTE ──────────────── */
 
-  "Çiğ Köfte Dürüm":                70,
-  "Çiğ Köfte Porsiyon (250 gr)":    60,
-  "500 gr Çiğ Köfte":              350,
+  "Çiğ Köfte Dürüm":                80,
+  "Çiğ Köfte Porsiyon (250 gr)":    200,
+  "500 gr Çiğ Köfte":              400,
   "1 KG Çiğ Köfte Malzemesiz":     700,
   "1 KG Çiğ Köfte":                800,
 
