@@ -12,10 +12,10 @@ const FIYATLAR = {
 
   /* ──────────────── EKMEK ARASI ──────────────── */
 
-  "Bütün Kokoreç":       560,
-  "Üç Çeyrek Kokoreç":   430,
-  "Yarım Kokoreç":       280,
-  "Çeyrek Kokoreç":      170,
+  "Bütün Kokoreç":       600,
+  "Üç Çeyrek Kokoreç":   470,
+  "Yarım Kokoreç":       300,
+  "Çeyrek Kokoreç":      190,
 
   "Bütün Köfte":         220,
   "Üç Çeyrek Köfte":     220,
@@ -43,7 +43,7 @@ const FIYATLAR = {
 
   /* ──────────────── PORSİYONLAR ──────────────── */
 
-  "Porsiyon Kokoreç":    620,
+  "Porsiyon Kokoreç":    660,
   "Porsiyon Köfte":      220,
   "Porsiyon Sucuk":      220,
   "Porsiyon Ciğer":      400,
@@ -58,8 +58,8 @@ const FIYATLAR = {
   "Şişe Ayran":           40,
   "Kutu Kola":            50,
   "Şişe Kola":            40,
-  "1 lt Kola":            60,
-  "2.5 lt Kola":         90,
+  "1 lt Kola":            70,
+  "2.5 lt Kola":         100,
   "Kutu Yedigün":         50,
   "Şişe Yedigün":         40,
   "Kutu Fruko":           50,
