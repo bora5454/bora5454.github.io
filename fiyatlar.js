@@ -66,7 +66,7 @@ const FIYATLAR = {
   "Meyve Suyu":           50,
   "Meyveli Soda":         20,
   "Soda":                 15,
-  "Su":                   10,
+  "Su":                   15,
   "Çay":                  15,
   "Ice Tea":              50,
   "Niğde Gazozu":         40,
