@@ -12,43 +12,43 @@ const FIYATLAR = {
 
   /* ──────────────── EKMEK ARASI ──────────────── */
 
-  "Bütün Kokoreç":       600,
-  "Üç Çeyrek Kokoreç":   470,
-  "Yarım Kokoreç":       300,
+  "Bütün Kokoreç":       620,
+  "Üç Çeyrek Kokoreç":   480,
+  "Yarım Kokoreç":       310,
   "Çeyrek Kokoreç":      190,
 
-  "Bütün Köfte":         220,
-  "Üç Çeyrek Köfte":     220,
-  "Yarım Köfte":         135,
-  "Çeyrek Köfte":        115,
+  "Bütün Köfte":         250,
+  "Üç Çeyrek Köfte":     250,
+  "Yarım Köfte":         150,
+  "Çeyrek Köfte":        120,
 
-  "Bütün Sucuk":         220,
-  "Üç Çeyrek Sucuk":     220,
-  "Yarım Sucuk":         135,
-  "Çeyrek Sucuk":        115,
+  "Bütün Sucuk":         250,
+  "Üç Çeyrek Sucuk":     250,
+  "Yarım Sucuk":         150,
+  "Çeyrek Sucuk":        120,
 
-  "Bütün Ciğer":         400,
-  "Üç Çeyrek Ciğer":     300,
-  "Yarım Ciğer":         200,
-  "Çeyrek Ciğer":        150,
+  "Bütün Ciğer":         440,
+  "Üç Çeyrek Ciğer":     310,
+  "Yarım Ciğer":         220,
+  "Çeyrek Ciğer":        160,
 
-  "Bütün Tavuk":         240,
-  "Üç Çeyrek Tavuk":     240,
-  "Yarım Tavuk":         120,
+  "Bütün Tavuk":         260,
+  "Üç Çeyrek Tavuk":     260,
+  "Yarım Tavuk":         130,
 
-  "Bütün Uykuluk":       400,
-  "Üç Çeyrek Uykuluk":   300,
-  "Yarım Uykuluk":       200,
-  "Çeyrek Uykuluk":      150,
+  "Bütün Uykuluk":       440,
+  "Üç Çeyrek Uykuluk":   310,
+  "Yarım Uykuluk":       220,
+  "Çeyrek Uykuluk":      160,
 
   /* ──────────────── PORSİYONLAR ──────────────── */
 
-  "Porsiyon Kokoreç":    660,
-  "Porsiyon Köfte":      220,
-  "Porsiyon Sucuk":      220,
-  "Porsiyon Ciğer":      400,
-  "Porsiyon Tavuk":      240,
-  "Porsiyon Uykuluk":    400,
+  "Porsiyon Kokoreç":    680,
+  "Porsiyon Köfte":      250,
+  "Porsiyon Sucuk":      250,
+  "Porsiyon Ciğer":      440,
+  "Porsiyon Tavuk":      260,
+  "Porsiyon Uykuluk":    440,
   "Midye (Adet)":         15,
 
   /* ──────────────── İÇECEKLER ──────────────── */
